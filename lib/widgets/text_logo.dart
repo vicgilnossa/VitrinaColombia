@@ -6,7 +6,8 @@ class TextLogo extends StatelessWidget {
   final double size;
   const TextLogo({
     Key? key,
-    required this.text, required this.size,
+    required this.text,
+    required this.size,
   }) : super(key: key);
 
   @override

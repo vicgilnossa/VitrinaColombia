@@ -19,13 +19,15 @@ class WelcomeScreen extends StatelessWidget {
               ))),
       child: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 28, top: 24, bottom: 180),
-            child: const Align(
-              alignment: Alignment.centerLeft,
-              child: TextLogo(
-                text: 'VitrinaCol.',
-                size: 32,
+          SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 28, top: 14, bottom: 180),
+              child: const Align(
+                alignment: Alignment.centerLeft,
+                child: TextLogo(
+                  text: 'VitrinaCol.',
+                  size: 32,
+                ),
               ),
             ),
           ),

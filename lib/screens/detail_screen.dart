@@ -11,12 +11,23 @@ class DetailScreen extends StatelessWidget {
       backgroundColor: const Color(0xFF272727),
       body: Center(
         child: Column(children: [
+          Padding(
+            padding: EdgeInsets.only(left: 28, right: 28, top: 12),
+            child: SafeArea(
+                child: TopNavBar(
+              customIcon1: "arrow-left.png",
+              custom1Functions: () {
+                Navigator.pushNamed(context, "home");
+              },
+              text: "Details",
+            )),
+          ),
           Stack(
             children: [
               Transform.translate(
                 offset: const Offset(10, 10),
                 child: Container(
-                  margin: const EdgeInsets.only(top: 80, left: 28, right: 28),
+                  margin: const EdgeInsets.only(top: 40, left: 28, right: 28),
                   width: double.infinity,
                   height: 319,
                   decoration: const ShapeDecoration(
@@ -27,7 +38,7 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 80, left: 28, right: 28),
+                margin: const EdgeInsets.only(top: 40, left: 28, right: 28),
                 width: double.infinity,
                 height: 319,
                 color: const Color(0xFFD4D4D4),
@@ -112,7 +123,7 @@ class DetailScreen extends StatelessWidget {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 120,
+                  height: 80,
                   child: SingleChildScrollView(
                     child: P(
                         text:
