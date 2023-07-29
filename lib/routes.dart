@@ -10,7 +10,7 @@ class Routes {
 
   static final Map<String, WidgetBuilder> routes = {
     welcome: (context) => const WelcomeScreen(),
-    home: (context) => const HomeScreen(),
+    home: (context) => HomeScreen(),
     detail: (context) => const DetailScreen(),
   };
 }

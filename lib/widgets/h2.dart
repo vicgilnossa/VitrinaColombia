@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TextLogo extends StatelessWidget {
+class H2 extends StatelessWidget {
   final String text;
-  final double size;
-  const TextLogo({
+  final Color color;
+  final double? size;
+  const H2({
     Key? key,
-    required this.text, required this.size,
+    required this.text,
+    required this.color,
+    this.size,
   }) : super(key: key);
 
   @override
@@ -14,10 +17,10 @@ class TextLogo extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.dmSans(
-        color: Colors.white,
-        fontSize: size,
+        color: color,
+        fontSize: size ?? 24,
         fontWeight: FontWeight.w700,
-        letterSpacing: -0.96,
+        letterSpacing: -0.72,
       ),
     );
   }

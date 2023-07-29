@@ -3,13 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 class P extends StatelessWidget {
   final String text;
-  final double fontSize;
+  final double? fontSize;
   final Color color;
+  final FontWeight? fontWeight;
   const P({
     Key? key,
     required this.text,
-    required this.fontSize,
+    this.fontSize,
     required this.color,
+    this.fontWeight,
   }) : super(key: key);
 
   @override
@@ -18,8 +20,8 @@ class P extends StatelessWidget {
       text,
       style: GoogleFonts.dmSans(
         color: color,
-        fontSize: fontSize,
-        fontWeight: FontWeight.w400,
+        fontSize: fontSize ?? 14,
+        fontWeight: fontWeight ?? FontWeight.w400,
         letterSpacing: -0.42,
       ),
     );

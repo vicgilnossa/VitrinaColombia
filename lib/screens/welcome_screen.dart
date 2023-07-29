@@ -19,8 +19,15 @@ class WelcomeScreen extends StatelessWidget {
               ))),
       child: Column(
         children: [
-          const TextLogo(
-            text: 'VitrinaCol.',
+          Padding(
+            padding: const EdgeInsets.only(left: 28, top: 24, bottom: 180),
+            child: const Align(
+              alignment: Alignment.centerLeft,
+              child: TextLogo(
+                text: 'VitrinaCol.',
+                size: 32,
+              ),
+            ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 28),
@@ -41,6 +48,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
                 const MainButton(
                   text: 'Empezar',
+                  route: 'home',
                 ),
               ],
             ),

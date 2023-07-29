@@ -6,10 +6,11 @@ import 'package:google_fonts/google_fonts.dart';
 class MainButton extends StatelessWidget {
   final String text;
   final IconData? icon;
+  final String route;
   const MainButton({
     Key? key,
     required this.text,
-    this.icon,
+    this.icon, required this.route,
   }) : super(key: key);
 
   @override
@@ -31,6 +32,7 @@ class MainButton extends StatelessWidget {
         MyButton(
           text: text,
           icon: icon,
+          route: route,
         ),
       ],
     );
@@ -40,7 +42,9 @@ class MainButton extends StatelessWidget {
 class MyButton extends StatefulWidget {
   final String text;
   final IconData? icon;
-  MyButton({required this.text, Key? key, this.icon}) : super(key: key);
+  final String route;
+  MyButton({required this.text, Key? key, this.icon, required this.route})
+      : super(key: key);
   @override
   _MyButtonState createState() => _MyButtonState();
 }
@@ -60,7 +64,7 @@ class _MyButtonState extends State<MyButton> {
         setState(() {});
 
         Timer(const Duration(seconds: 2), () {
-          Navigator.pushNamed(context, "home");
+          Navigator.pushReplacementNamed(context, widget.route);
         });
       },
       onTapCancel: () {
