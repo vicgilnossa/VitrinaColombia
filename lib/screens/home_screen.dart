@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:vitrina_colombia/controllers/designer_controller.dart';
+import 'package:vitrina_colombia/models/designer.dart';
+import 'package:vitrina_colombia/models/project.dart';
 import 'package:vitrina_colombia/screens/showcase_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -77,8 +81,41 @@ class Screen1 extends StatelessWidget {
 class Screen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final userController = Get.put(DesignerController());
     return Center(
-      child: Text('Screen 2'),
+      child: TextButton(
+          onPressed: () {
+            userController.loadDesigner(Designer(
+                name: "Linkcars",
+                city: "Cali",
+                description: "Diseñador parchado",
+                projects: [
+                  Project(
+                    "Past time",
+                    "Mayo 21, 2019",
+                    "Diseño",
+                    "Eneba",
+                    "3D Max",
+                    "90",
+                    "This form is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
+                    ["assets/past-time.jpg", "assets/past-time-1.jpg"],
+                    345,
+                    23,
+                  ),
+                  Project(
+                      "Move house",
+                      "Mayo 21, 2019",
+                      "Ilustración",
+                      "Norma",
+                      "Adobe XD",
+                      "780",
+                      "Como fue",
+                      ["assets/move-house.jpg"],
+                      21,
+                      21)
+                ]));
+          },
+          child: Text("Mandar usuario")),
     );
   }
 }

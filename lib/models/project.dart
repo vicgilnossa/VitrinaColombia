@@ -9,6 +9,7 @@ class Project {
   final String client;
   final String tool;
   final String viewsQuantity;
+  final String description;
   List<String> pictures;
 
   final int likesQuantity;
@@ -21,6 +22,7 @@ class Project {
     this.client,
     this.tool,
     this.viewsQuantity,
+    this.description,
     this.pictures,
     this.likesQuantity,
     this.commentsQuantity,
@@ -33,6 +35,7 @@ class Project {
     String? client,
     String? tool,
     String? viewsQuantity,
+    String? description,
     List<String>? pictures,
     int? likesQuantity,
     int? commentsQuantity,
@@ -44,6 +47,7 @@ class Project {
       client ?? this.client,
       tool ?? this.tool,
       viewsQuantity ?? this.viewsQuantity,
+      description ?? this.description,
       pictures ?? this.pictures,
       likesQuantity ?? this.likesQuantity,
       commentsQuantity ?? this.commentsQuantity,
@@ -58,6 +62,7 @@ class Project {
       'client': client,
       'tool': tool,
       'viewsQuantity': viewsQuantity,
+      'description': description,
       'pictures': pictures,
       'likesQuantity': likesQuantity,
       'commentsQuantity': commentsQuantity,
@@ -72,6 +77,7 @@ class Project {
       map['client'] ?? '',
       map['tool'] ?? '',
       map['viewsQuantity'] ?? '',
+      map['description'] ?? '',
       List<String>.from(map['pictures']),
       map['likesQuantity']?.toInt() ?? 0,
       map['commentsQuantity']?.toInt() ?? 0,
@@ -80,39 +86,42 @@ class Project {
 
   String toJson() => json.encode(toMap());
 
-  factory Project.fromJson(String source) => Project.fromMap(json.decode(source));
+  factory Project.fromJson(String source) =>
+      Project.fromMap(json.decode(source));
 
   @override
   String toString() {
-    return 'Project(name: $name, postDate: $postDate, category: $category, client: $client, tool: $tool, viewsQuantity: $viewsQuantity, pictures: $pictures, likesQuantity: $likesQuantity, commentsQuantity: $commentsQuantity)';
+    return 'Project(name: $name, postDate: $postDate, category: $category, client: $client, tool: $tool, viewsQuantity: $viewsQuantity, description: $description, pictures: $pictures, likesQuantity: $likesQuantity, commentsQuantity: $commentsQuantity)';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-  
+
     return other is Project &&
-      other.name == name &&
-      other.postDate == postDate &&
-      other.category == category &&
-      other.client == client &&
-      other.tool == tool &&
-      other.viewsQuantity == viewsQuantity &&
-      listEquals(other.pictures, pictures) &&
-      other.likesQuantity == likesQuantity &&
-      other.commentsQuantity == commentsQuantity;
+        other.name == name &&
+        other.postDate == postDate &&
+        other.category == category &&
+        other.client == client &&
+        other.tool == tool &&
+        other.viewsQuantity == viewsQuantity &&
+        other.description == description &&
+        listEquals(other.pictures, pictures) &&
+        other.likesQuantity == likesQuantity &&
+        other.commentsQuantity == commentsQuantity;
   }
 
   @override
   int get hashCode {
     return name.hashCode ^
-      postDate.hashCode ^
-      category.hashCode ^
-      client.hashCode ^
-      tool.hashCode ^
-      viewsQuantity.hashCode ^
-      pictures.hashCode ^
-      likesQuantity.hashCode ^
-      commentsQuantity.hashCode;
+        postDate.hashCode ^
+        category.hashCode ^
+        client.hashCode ^
+        tool.hashCode ^
+        viewsQuantity.hashCode ^
+        description.hashCode ^
+        pictures.hashCode ^
+        likesQuantity.hashCode ^
+        commentsQuantity.hashCode;
   }
 }

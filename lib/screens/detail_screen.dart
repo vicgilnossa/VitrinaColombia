@@ -1,3 +1,7 @@
+import 'package:get/get.dart';
+import 'package:vitrina_colombia/controllers/designer_controller.dart';
+import 'package:vitrina_colombia/models/designer.dart';
+
 import '../widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
@@ -7,139 +11,152 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final designerController = Get.put(DesignerController());
     return Scaffold(
       backgroundColor: const Color(0xFF272727),
-      body: Center(
-        child: Column(children: [
-          Padding(
-            padding: EdgeInsets.only(left: 28, right: 28, top: 12),
-            child: SafeArea(
-                child: TopNavBar(
-              customIcon1: "arrow-left.png",
-              custom1Functions: () {
-                Navigator.pushNamed(context, "home");
-              },
-              text: "Details",
-            )),
-          ),
-          Stack(
-            children: [
-              Transform.translate(
-                offset: const Offset(10, 10),
-                child: Container(
-                  margin: const EdgeInsets.only(top: 40, left: 28, right: 28),
-                  width: double.infinity,
-                  height: 319,
-                  decoration: const ShapeDecoration(
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(width: 0.50, color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
+      body: InfoCanvas(
+        designer: designerController.designer.value,
+      ),
+    );
+  }
+}
+
+class InfoCanvas extends StatelessWidget {
+  final Designer designer;
+  const InfoCanvas({
+    Key? key,
+    required this.designer,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(children: [
+        Padding(
+          padding: EdgeInsets.only(left: 28, right: 28, top: 12),
+          child: SafeArea(
+              child: TopNavBar(
+            customIcon1: "arrow-left.png",
+            custom1Functions: () {
+              Navigator.pushNamed(context, "home");
+            },
+            text: "Details",
+          )),
+        ),
+        Stack(
+          children: [
+            Transform.translate(
+              offset: const Offset(10, 10),
+              child: Container(
                 margin: const EdgeInsets.only(top: 40, left: 28, right: 28),
                 width: double.infinity,
                 height: 319,
-                color: const Color(0xFFD4D4D4),
-              ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.only(top: 26, left: 28, right: 28),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: H2(text: "Can you hear me?", color: Colors.white),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 15, left: 28),
-            child: Row(
-              children: [
-                const CircleAvatar(
-                  maxRadius: 12,
-                ),
-                const SizedBox(
-                  width: 8,
-                ),
-                P(text: "Zack Alvarez", color: Colors.white.withOpacity(0.5)),
-                const SizedBox(
-                  width: 8,
-                ),
-                P(
-                  text: "• Abril 22 2018",
-                  color: Colors.white.withOpacity(0.5),
-                  fontWeight: FontWeight.w500,
-                )
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 28, top: 21, bottom: 24),
-            child: Row(
-              children: const [
-                LikeButtonCounter(),
-                SizedBox(
-                  width: 16,
-                ),
-                CommentsButtonNav(),
-                SizedBox(
-                  width: 16,
-                ),
-                ViewsInfo()
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 28),
-            child: Row(
-              children: [
-                InfoBox(title: "Categoría", info: "Photography"),
-                SizedBox(
-                  width: 24,
-                ),
-                InfoBox(title: "Cliente", info: "Colanta"),
-                SizedBox(
-                  width: 24,
-                ),
-                InfoBox(title: "Herramienta", info: "Photoshop")
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 28, right: 28, top: 28),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: P(
-                      text: "Description",
-                      fontSize: 12,
-                      color: Colors.white.withOpacity(0.50),
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 80,
-                  child: SingleChildScrollView(
-                    child: P(
-                        text:
-                            "This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
-                        color: Colors.white),
+                decoration: const ShapeDecoration(
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(width: 0.50, color: Colors.white),
                   ),
                 ),
-                SizedBox(
-                  height: 8,
-                ),
-                MainButton(text: "Contactar", route: "home")
-              ],
+              ),
             ),
-          )
-        ]),
-      ),
+            Container(
+              margin: const EdgeInsets.only(top: 40, left: 28, right: 28),
+              width: double.infinity,
+              height: 319,
+              color: const Color(0xFFD4D4D4),
+            ),
+          ],
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 26, left: 28, right: 28),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: H2(text: designer.projects![0].name, color: Colors.white),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 15, left: 28),
+          child: Row(
+            children: [
+              const CircleAvatar(
+                maxRadius: 12,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              P(text: designer.name, color: Colors.white.withOpacity(0.5)),
+              const SizedBox(
+                width: 8,
+              ),
+              P(
+                text: "• ${designer.projects![0].postDate}",
+                color: Colors.white.withOpacity(0.5),
+                fontWeight: FontWeight.w500,
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 28, top: 21, bottom: 24),
+          child: Row(
+            children: const [
+              LikeButtonCounter(),
+              SizedBox(
+                width: 16,
+              ),
+              CommentsButtonNav(),
+              SizedBox(
+                width: 16,
+              ),
+              ViewsInfo()
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 28),
+          child: Row(
+            children: [
+              InfoBox(title: "Categoría", info: "Photography"),
+              SizedBox(
+                width: 24,
+              ),
+              InfoBox(title: "Cliente", info: "Colanta"),
+              SizedBox(
+                width: 24,
+              ),
+              InfoBox(title: "Herramienta", info: "Photoshop")
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 28, right: 28, top: 28),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: P(
+                    text: "Description",
+                    fontSize: 12,
+                    color: Colors.white.withOpacity(0.50),
+                    fontWeight: FontWeight.w500),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Container(
+                width: double.infinity,
+                height: 80,
+                child: SingleChildScrollView(
+                  child: P(text: designer.description, color: Colors.white),
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              MainButton(text: "Contactar", route: "home")
+            ],
+          ),
+        )
+      ]),
     );
   }
 }

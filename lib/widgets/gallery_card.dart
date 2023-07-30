@@ -6,8 +6,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:vitrina_colombia/widgets/p.dart';
 
 class GalleryCard extends StatelessWidget {
+  final String title;
+  final String designer;
+  final String viewsQuantity;
+  final String description;
+  final String image;
+
   const GalleryCard({
     Key? key,
+    required this.title,
+    required this.designer,
+    required this.viewsQuantity,
+    required this.description,
+    required this.image,
   }) : super(key: key);
 
   @override
@@ -26,18 +37,33 @@ class GalleryCard extends StatelessWidget {
             ),
           ),
         ),
-        MyButton(),
+        MyButton(
+            title: title,
+            designer: designer,
+            viewsQuantity: viewsQuantity,
+            description: description,
+            image: image),
       ],
     );
   }
 }
 
 class MyButton extends StatefulWidget {
+  final String title;
+  final String designer;
+  final String viewsQuantity;
+  final String description;
+  final String image;
   final IconData? icon;
 
   MyButton({
     Key? key,
     this.icon,
+    required this.title,
+    required this.designer,
+    required this.viewsQuantity,
+    required this.description,
+    required this.image,
   }) : super(key: key);
   @override
   _MyButtonState createState() => _MyButtonState();
@@ -73,6 +99,10 @@ class _MyButtonState extends State<MyButton> {
         child: Column(
           children: [
             Container(
+                child: Image.asset(
+                  widget.image,
+                  fit: BoxFit.cover,
+                ),
                 width: double.infinity,
                 height: 166,
                 margin: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -88,7 +118,7 @@ class _MyButtonState extends State<MyButton> {
                   children: [
                     P(
                         fontWeight: FontWeight.w700,
-                        text: "Can you hear me?",
+                        text: widget.title,
                         fontSize: 14,
                         color: Color(0xFF232323)),
                     P(
@@ -118,8 +148,8 @@ class _MyButtonState extends State<MyButton> {
                             SizedBox(
                               width: 3,
                             ),
-                            const P(
-                              text: "125",
+                            P(
+                              text: widget.viewsQuantity,
                               fontSize: 14,
                               color: Color(0xFF232323),
                               fontWeight: FontWeight.w500,
@@ -140,24 +170,24 @@ class _MyButtonState extends State<MyButton> {
                         fontWeight: FontWeight.w400,
                         letterSpacing: -0.42,
                       ),
-                      child: Text.rich(
-                        TextSpan(
-                          children: [
-                            TextSpan(
-                              text:
-                                  "This statue is a relic of the ancient Romans which is currently placed in a museum in Greece. ",
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.description,
+                            maxLines: 2, // Limita el texto a tres líneas
+                            // Mostrar puntos suspensivos (...) al final si el texto se corta
+                          ),
+                          Text(
+                            "Read More...",
+                            style: GoogleFonts.dmSans(
+                              color: Color(0xFF232323),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                              letterSpacing: -0.42,
                             ),
-                            TextSpan(
-                              text: "Read More...",
-                              style: GoogleFonts.dmSans(
-                                color: Color(0xFF232323),
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: -0.42,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
