@@ -1,24 +1,29 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vitrina_colombia/widgets/p.dart';
+import 'package:vitrina_colombia/widgets/widgets.dart';
 
 class GalleryCard extends StatelessWidget {
   final String title;
-  final String designer;
+
   final String viewsQuantity;
+  final String commentsQuantity;
+  final String likesQuantity;
   final String description;
   final String image;
+  final String? owner;
+  final String? profilePic;
 
   const GalleryCard({
     Key? key,
     required this.title,
-    required this.designer,
     required this.viewsQuantity,
     required this.description,
     required this.image,
+    required this.owner,
+    required this.commentsQuantity,
+    required this.likesQuantity,
+    required this.profilePic,
   }) : super(key: key);
 
   @override
@@ -38,11 +43,15 @@ class GalleryCard extends StatelessWidget {
           ),
         ),
         MyButton(
-            title: title,
-            designer: designer,
-            viewsQuantity: viewsQuantity,
-            description: description,
-            image: image),
+          title: title,
+          viewsQuantity: viewsQuantity,
+          description: description,
+          image: image,
+          owner: owner,
+          commentsQuantity: commentsQuantity,
+          likesQuantity: likesQuantity,
+          profilePic: profilePic,
+        ),
       ],
     );
   }
@@ -50,20 +59,27 @@ class GalleryCard extends StatelessWidget {
 
 class MyButton extends StatefulWidget {
   final String title;
-  final String designer;
+
   final String viewsQuantity;
+  final String commentsQuantity;
+  final String likesQuantity;
   final String description;
   final String image;
+  final String? owner;
+  final String? profilePic;
   final IconData? icon;
 
   MyButton({
     Key? key,
     this.icon,
     required this.title,
-    required this.designer,
     required this.viewsQuantity,
     required this.description,
     required this.image,
+    required this.owner,
+    required this.commentsQuantity,
+    required this.likesQuantity,
+    required this.profilePic,
   }) : super(key: key);
   @override
   _MyButtonState createState() => _MyButtonState();
@@ -111,7 +127,9 @@ class _MyButtonState extends State<MyButton> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: CircleAvatar(backgroundColor: Color(0xFFD4D4D4)),
+                  child: CircleAvatar(
+                      backgroundImage: AssetImage(widget.profilePic!),
+                      backgroundColor: Color(0xFFD4D4D4)),
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +140,7 @@ class _MyButtonState extends State<MyButton> {
                         fontSize: 14,
                         color: Color(0xFF232323)),
                     P(
-                        text: "Zack Jarosv",
+                        text: widget.owner,
                         fontSize: 12,
                         color: Color(0xFF757575)),
                   ],
@@ -133,31 +151,25 @@ class _MyButtonState extends State<MyButton> {
               alignment: Alignment.centerLeft,
               child: Column(
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                      top: 5,
-                      left: 64,
-                    ),
+                  SizedBox(
                     width: double.infinity,
-                    child: Row(children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16, bottom: 8),
-                        child: Row(
-                          children: [
-                            Image.asset("assets/eye.png"),
-                            SizedBox(
-                              width: 3,
-                            ),
-                            P(
-                              text: widget.viewsQuantity,
-                              fontSize: 14,
-                              color: Color(0xFF232323),
-                              fontWeight: FontWeight.w500,
-                            )
-                          ],
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 64, top: 8, right: 16, bottom: 8),
+                      child: Row(children: [
+                        IconInfo(icon: "like.png", text: widget.likesQuantity),
+                        const SizedBox(
+                          width: 16,
                         ),
-                      )
-                    ]),
+                        IconInfo(
+                            icon: "comments.png",
+                            text: widget.commentsQuantity),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        IconInfo(icon: "eye.png", text: widget.viewsQuantity)
+                      ]),
+                    ),
                   ),
                   Container(
                     margin: const EdgeInsets.only(left: 64, right: 10),
@@ -175,8 +187,7 @@ class _MyButtonState extends State<MyButton> {
                         children: [
                           Text(
                             widget.description,
-                            maxLines: 2, // Limita el texto a tres líneas
-                            // Mostrar puntos suspensivos (...) al final si el texto se corta
+                            maxLines: 2,
                           ),
                           Text(
                             "Read More...",

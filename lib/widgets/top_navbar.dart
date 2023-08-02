@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:vitrina_colombia/widgets/widgets.dart';
 
 class TopNavBar extends StatelessWidget {
-  final String? customIcon1;
+  final String? Icon1;
   final String? text;
   final String? customIcon2;
-  final void Function()? custom1Functions;
-  final void Function()? custom2Functions;
+  final void Function()? Icon1CustomFunction;
+  final void Function()? Icon2CustomFunction;
   const TopNavBar({
     Key? key,
-    this.customIcon1,
+    this.Icon1,
     this.text,
     this.customIcon2,
-    this.custom1Functions,
-    this.custom2Functions,
+    this.Icon1CustomFunction,
+    this.Icon2CustomFunction,
   }) : super(key: key);
 
   @override
@@ -21,10 +21,10 @@ class TopNavBar extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        customIcon1 != null
+        Icon1 != null
             ? GestureDetector(
-                onTap: custom1Functions,
-                child: Image.asset("assets/${customIcon1!}"))
+                onTap: Icon1CustomFunction,
+                child: Image.asset("assets/${Icon1!}"))
             : Container(),
         Expanded(
           child: Align(
@@ -37,7 +37,8 @@ class TopNavBar extends StatelessWidget {
         ),
         customIcon2 != null
             ? GestureDetector(
-                onTap: custom2Functions, child: Image.asset("assets/${customIcon2!}"))
+                onTap: Icon2CustomFunction,
+                child: Image.asset("assets/${customIcon2!}"))
             : Container(),
       ],
     );

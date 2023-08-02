@@ -8,16 +8,16 @@ class P extends StatelessWidget {
   final FontWeight? fontWeight;
   const P({
     Key? key,
-     this.text,
+    this.text,
     this.fontSize,
-     this.color,
+    this.color,
     this.fontWeight,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      text!,
+      text ?? "Error text",
       style: GoogleFonts.dmSans(
         color: color,
         fontSize: fontSize ?? 14,

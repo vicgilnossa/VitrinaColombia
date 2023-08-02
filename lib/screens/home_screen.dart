@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:vitrina_colombia/controllers/designer_controller.dart';
 import 'package:vitrina_colombia/models/designer.dart';
+import 'package:vitrina_colombia/models/designers.dart';
 import 'package:vitrina_colombia/models/project.dart';
 import 'package:vitrina_colombia/screens/showcase_screen.dart';
 
@@ -85,35 +86,91 @@ class Screen2 extends StatelessWidget {
     return Center(
       child: TextButton(
           onPressed: () {
-            userController.loadDesigner(Designer(
+            final fakeDesigner = Designer(
                 name: "Linkcars",
-                city: "Cali",
-                description: "Diseñador parchado",
+                profilePicture: "assets/profile-pic.jpg",
                 projects: [
                   Project(
-                    "Past time",
-                    "Mayo 21, 2019",
-                    "Diseño",
-                    "Eneba",
-                    "3D Max",
-                    "90",
-                    "This form is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
-                    ["assets/past-time.jpg", "assets/past-time-1.jpg"],
-                    345,
-                    23,
-                  ),
+                      "Past time",
+                      "January 14, 2019",
+                      "Diseño",
+                      "Eneba",
+                      "3D Max",
+                      "This is a Nintendo 3DMAX classic console replica.",
+                      ["assets/past-time.jpg", "assets/past-time1.jpg"],
+                      35,
+                      31,
+                      235),
                   Project(
-                      "Move house",
-                      "Mayo 21, 2019",
-                      "Ilustración",
-                      "Norma",
-                      "Adobe XD",
-                      "780",
-                      "Como fue",
+                      "Move House",
+                      "Mayo 14, 2020",
+                      "Diseño",
+                      "Freepik",
+                      "Ilustrator",
+                      "This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
                       ["assets/move-house.jpg"],
-                      21,
-                      21)
-                ]));
+                      356,
+                      313,
+                      535)
+                ]);
+            final fakeBackend = [
+              Designer(
+                  name: "Linkcars",
+                  profilePicture: "assets/profile-pic.jpg",
+                  projects: [
+                    Project(
+                        "Past time",
+                        "December 14, 2019",
+                        "Diseño",
+                        "Eneba",
+                        "3D Max",
+                        "This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
+                        ["assets/past-time.jpg"],
+                        35,
+                        31,
+                        235),
+                    Project(
+                        "Move House",
+                        "Mayo 14, 2020",
+                        "Diseño",
+                        "Freepik",
+                        "Ilustrator",
+                        "This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
+                        ["assets/move-house.jpg"],
+                        356,
+                        313,
+                        535)
+                  ]),
+              Designer(
+                  name: "Cerón 93",
+                  profilePicture: "assets/profile-pic-1.jpg",
+                  projects: [
+                    Project(
+                        "Past time",
+                        "Abril 14, 2019",
+                        "Diseño",
+                        "Eneba",
+                        "3D Max",
+                        "This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
+                        ["assets/pa-alquilar.jpg"],
+                        35,
+                        31,
+                        235),
+                    Project(
+                        "Move House",
+                        "Mayo 14, 2020",
+                        "Diseño",
+                        "Freepik",
+                        "Ilustrator",
+                        "This statue is a relic of the ancient Romans which is currently placed in a museum in Greece.",
+                        ["assets/cabos-sueltos.jpg"],
+                        356,
+                        313,
+                        535)
+                  ]),
+            ];
+            userController.loadDesigners(Designers(designers: fakeBackend));
+            userController.loadDesigner(fakeDesigner);
           },
           child: Text("Mandar usuario")),
     );

@@ -16,6 +16,7 @@ class H1 extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.dmSans(
+        decoration: TextDecoration.none,
         color: Colors.white,
         fontSize: fontSize,
         fontWeight: FontWeight.w700,

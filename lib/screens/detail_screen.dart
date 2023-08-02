@@ -1,10 +1,9 @@
-import 'package:get/get.dart';
-import 'package:vitrina_colombia/controllers/designer_controller.dart';
-import 'package:vitrina_colombia/models/designer.dart';
-
 import '../widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:vitrina_colombia/controllers/designer_controller.dart';
+import 'package:vitrina_colombia/models/designer.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({Key? key}) : super(key: key);
@@ -14,16 +13,16 @@ class DetailScreen extends StatelessWidget {
     final designerController = Get.put(DesignerController());
     return Scaffold(
       backgroundColor: const Color(0xFF272727),
-      body: InfoCanvas(
+      body: DetailBody(
         designer: designerController.designer.value,
       ),
     );
   }
 }
 
-class InfoCanvas extends StatelessWidget {
+class DetailBody extends StatelessWidget {
   final Designer designer;
-  const InfoCanvas({
+  const DetailBody({
     Key? key,
     required this.designer,
   }) : super(key: key);
@@ -33,100 +32,44 @@ class InfoCanvas extends StatelessWidget {
     return Center(
       child: Column(children: [
         Padding(
-          padding: EdgeInsets.only(left: 28, right: 28, top: 12),
+          padding: const EdgeInsets.only(left: 28, right: 28, top: 12),
           child: SafeArea(
               child: TopNavBar(
-            customIcon1: "arrow-left.png",
-            custom1Functions: () {
+            Icon1: "arrow-left.png",
+            Icon1CustomFunction: () {
               Navigator.pushNamed(context, "home");
             },
             text: "Details",
           )),
         ),
-        Stack(
-          children: [
-            Transform.translate(
-              offset: const Offset(10, 10),
-              child: Container(
-                margin: const EdgeInsets.only(top: 40, left: 28, right: 28),
-                width: double.infinity,
-                height: 319,
-                decoration: const ShapeDecoration(
-                  shape: RoundedRectangleBorder(
-                    side: BorderSide(width: 0.50, color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 40, left: 28, right: 28),
-              width: double.infinity,
-              height: 319,
-              color: const Color(0xFFD4D4D4),
-            ),
-          ],
-        ),
-        Padding(
-          padding: EdgeInsets.only(top: 26, left: 28, right: 28),
-          child: Align(
-            alignment: Alignment.centerLeft,
-            child: H2(text: designer.projects![0].name, color: Colors.white),
+        const Padding(
+          padding: EdgeInsets.only(top: 40, left: 28, right: 28),
+          child: ProjectImagesCanvas(
+            
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 15, left: 28),
-          child: Row(
-            children: [
-              const CircleAvatar(
-                maxRadius: 12,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              P(text: designer.name, color: Colors.white.withOpacity(0.5)),
-              const SizedBox(
-                width: 8,
-              ),
-              P(
-                text: "• ${designer.projects![0].postDate}",
-                color: Colors.white.withOpacity(0.5),
-                fontWeight: FontWeight.w500,
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 28, top: 21, bottom: 24),
-          child: Row(
-            children: const [
-              LikeButtonCounter(),
-              SizedBox(
-                width: 16,
-              ),
-              CommentsButtonNav(),
-              SizedBox(
-                width: 16,
-              ),
-              ViewsInfo()
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 28),
-          child: Row(
-            children: [
-              InfoBox(title: "Categoría", info: "Photography"),
-              SizedBox(
-                width: 24,
-              ),
-              InfoBox(title: "Cliente", info: "Colanta"),
-              SizedBox(
-                width: 24,
-              ),
-              InfoBox(title: "Herramienta", info: "Photoshop")
-            ],
-          ),
-        ),
+        _Title(designer: designer),
+        _OwnerDateBar(designer: designer),
+        _WhiteButtonBar(designer: designer),
+        _MoreInfoBar(designer: designer),
+        _DescriptionBox(designer: designer)
+      ]),
+    );
+  }
+}
+
+class _DescriptionBox extends StatelessWidget {
+  const _DescriptionBox({
+    Key? key,
+    required this.designer,
+  }) : super(key: key);
+
+  final Designer designer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
         Padding(
           padding: const EdgeInsets.only(left: 28, right: 28, top: 28),
           child: Column(
@@ -139,110 +82,198 @@ class InfoCanvas extends StatelessWidget {
                     color: Colors.white.withOpacity(0.50),
                     fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 height: 80,
                 child: SingleChildScrollView(
-                  child: P(text: designer.description, color: Colors.white),
+                  child: P(
+                      text: designer.projects![0].description,
+                      color: Colors.white),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
-              MainButton(text: "Contactar", route: "home")
+              const MainButton(text: "Contactar", route: "home")
             ],
           ),
-        )
-      ]),
-    );
-  }
-}
-
-class InfoBox extends StatelessWidget {
-  final String title;
-  final String info;
-  const InfoBox({
-    Key? key,
-    required this.title,
-    required this.info,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        P(
-          text: title,
-          color: Colors.white.withOpacity(0.50),
-          fontSize: 12,
-          fontWeight: FontWeight.w500,
         ),
-        SizedBox(
-          height: 8,
-        ),
-        P(
-          text: info,
-          color: Colors.white,
-          fontSize: 12,
-        )
       ],
     );
   }
 }
 
-class ViewsInfo extends StatelessWidget {
-  const ViewsInfo({
+class _MoreInfoBar extends StatelessWidget {
+  const _MoreInfoBar({
     Key? key,
+    required this.designer,
+  }) : super(key: key);
+  final Designer designer;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 28),
+      child: Row(
+        children: [
+          InfoBox(title: "Categoría", info: designer.projects![0].category),
+          const SizedBox(
+            width: 24,
+          ),
+          InfoBox(title: "Cliente", info: designer.projects![0].client),
+          const SizedBox(
+            width: 24,
+          ),
+          InfoBox(title: "Herramienta", info: designer.projects![0].tool)
+        ],
+      ),
+    );
+  }
+}
+
+class _WhiteButtonBar extends StatelessWidget {
+  const _WhiteButtonBar({
+    Key? key,
+    required this.designer,
+  }) : super(key: key);
+  final Designer designer;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 28, top: 21, bottom: 24),
+      child: Row(
+        children: [
+          _LikesButtonCounter(
+            designer: designer,
+          ),
+          const SizedBox(
+            width: 16,
+          ),
+          _CommentsButton(designer: designer),
+          const SizedBox(
+            width: 16,
+          ),
+          _ViewsButton(designer: designer)
+        ],
+      ),
+    );
+  }
+}
+
+class _Title extends StatelessWidget {
+  const _Title({
+    Key? key,
+    required this.designer,
+  }) : super(key: key);
+  final Designer designer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 26, left: 28, right: 28),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: H2(text: designer.projects![0].name, color: Colors.white),
+      ),
+    );
+  }
+}
+
+class _OwnerDateBar extends StatelessWidget {
+  const _OwnerDateBar({
+    Key? key,
+    required this.designer,
   }) : super(key: key);
 
+  final Designer designer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 15, left: 28),
+      child: Row(
+        children: [
+          CircleAvatar(
+            backgroundImage:
+                AssetImage(designer.profilePicture ?? "assets/profile-pic.jpg"),
+            maxRadius: 12,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          P(text: designer.name, color: Colors.white.withOpacity(0.5)),
+          const SizedBox(
+            width: 8,
+          ),
+          P(
+            text: "• ${designer.projects![0].postDate}",
+            color: Colors.white.withOpacity(0.5),
+            fontWeight: FontWeight.w500,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class _ViewsButton extends StatelessWidget {
+  const _ViewsButton({
+    Key? key,
+    required this.designer,
+  }) : super(key: key);
+  final Designer designer;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Image.asset("assets/white-eye.png"),
-        SizedBox(
+        const SizedBox(
           width: 3,
         ),
-        P(text: "8.9M", color: const Color(0xFF757575))
+        P(
+            text: designer.projects![0].viewsQuantity.toString(),
+            color: Color(0xFF757575))
       ],
     );
   }
 }
 
-class CommentsButtonNav extends StatelessWidget {
-  const CommentsButtonNav({
+class _CommentsButton extends StatelessWidget {
+  const _CommentsButton({
     Key? key,
+    required this.designer,
   }) : super(key: key);
-
+  final Designer designer;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Image.asset("assets/white-comments.png"),
-        SizedBox(
+        const SizedBox(
           width: 3,
         ),
-        P(text: "45", color: const Color(0xFF757575))
+        P(
+            text: designer.projects![0].commentsQuantity.toString(),
+            color: Color(0xFF757575))
       ],
     );
   }
 }
 
-class LikeButtonCounter extends StatefulWidget {
-  const LikeButtonCounter({
+class _LikesButtonCounter extends StatefulWidget {
+  const _LikesButtonCounter({
     Key? key,
+    required this.designer,
   }) : super(key: key);
-
+  final Designer designer;
   @override
-  _LikeButtonCounterState createState() => _LikeButtonCounterState();
+  __LikesButtonCounterState createState() => __LikesButtonCounterState();
 }
 
-class _LikeButtonCounterState extends State<LikeButtonCounter> {
-  int likeCount = 10;
+class __LikesButtonCounterState extends State<_LikesButtonCounter> {
+  late int likeCount = widget.designer.projects![0].likesQuantity;
   bool isLiked = false;
 
   void _toggleLike() {

@@ -15,6 +15,7 @@ class TextLogo extends StatelessWidget {
     return Text(
       text,
       style: GoogleFonts.dmSans(
+        decoration: TextDecoration.none,
         color: Colors.white,
         fontSize: size,
         fontWeight: FontWeight.w700,
