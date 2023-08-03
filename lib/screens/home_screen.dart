@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
+  final List<Widget> _tabViewScreens = [
     const ShowCaseScreen(),
     Screen2(),
     Screen3(),
@@ -25,9 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_currentIndex],
+      body: _tabViewScreens[_currentIndex],
       bottomNavigationBar: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           border: Border(
             top: BorderSide(width: 0.5, color: Colors.white),
           ),
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 100,
         child: Theme(
           data: Theme.of(context).copyWith(
-            canvasColor: Color(0xFF272727),
+            canvasColor: const Color(0xFF272727),
           ),
           child: BottomNavigationBar(
             currentIndex: _currentIndex,
@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 _currentIndex = index;
               });
             },
-            items: [
+            items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_filled),
                 label: '',

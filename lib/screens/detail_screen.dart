@@ -1,3 +1,5 @@
+import 'package:card_swiper/card_swiper.dart';
+
 import '../widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -42,18 +44,47 @@ class DetailBody extends StatelessWidget {
             text: "Details",
           )),
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 40, left: 28, right: 28),
-          child: ProjectImagesCanvas(
-            
-          ),
-        ),
+        _DetailSwiper(designer: designer),
         _Title(designer: designer),
         _OwnerDateBar(designer: designer),
         _WhiteButtonBar(designer: designer),
-        _MoreInfoBar(designer: designer),
+        _MoreInfoBar(
+          designer: designer,
+          title1: 'Categoría',
+          title2: 'Cliente',
+          title3: 'Herramienta',
+        ),
         _DescriptionBox(designer: designer)
       ]),
+    );
+  }
+}
+
+class _DetailSwiper extends StatelessWidget {
+  const _DetailSwiper({
+    Key? key,
+    required this.designer,
+  }) : super(key: key);
+
+  final Designer designer;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 400,
+      child: Swiper(
+        pagination: SwiperPagination(),
+        control: SwiperControl(),
+        itemCount: 2,
+        itemBuilder: (context, index) {
+          final project = designer.projects![index];
+          return Padding(
+            padding: EdgeInsets.only(top: 40, left: 28, right: 28),
+            child: ProjectImagesCanvas(image: project.pictures[index]),
+          );
+        },
+      ),
     );
   }
 }
@@ -110,23 +141,29 @@ class _MoreInfoBar extends StatelessWidget {
   const _MoreInfoBar({
     Key? key,
     required this.designer,
+    required this.title1,
+    required this.title2,
+    required this.title3,
   }) : super(key: key);
   final Designer designer;
+  final String title1;
+  final String title2;
+  final String title3;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 28),
       child: Row(
         children: [
-          InfoBox(title: "Categoría", info: designer.projects![0].category),
+          InfoBox(title: title1, info: designer.projects![0].category),
           const SizedBox(
             width: 24,
           ),
-          InfoBox(title: "Cliente", info: designer.projects![0].client),
+          InfoBox(title: title2, info: designer.projects![0].client),
           const SizedBox(
             width: 24,
           ),
-          InfoBox(title: "Herramienta", info: designer.projects![0].tool)
+          InfoBox(title: title3, info: designer.projects![0].tool)
         ],
       ),
     );

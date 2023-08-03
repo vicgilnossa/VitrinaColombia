@@ -18,45 +18,75 @@ class WelcomeScreen extends StatelessWidget {
                 "assets/general-background.png",
               ))),
       child: Column(
-        children: [
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 28, top: 14, bottom: 180),
-              child: const Align(
-                alignment: Alignment.centerLeft,
-                child: TextLogo(
-                  text: 'VitrinaCol.',
-                  size: 32,
-                ),
-              ),
-            ),
+        children: const [
+          _WelcomeLogo(
+            text: 'VitrinaCol.',
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 28),
-            width: double.infinity,
-            child: Column(
-              children: [
-                const H1(
-                    text:
-                        'Descubre lo mejor del diseño y la ilustración colombiana',
-                    fontSize: 40),
-                Padding(
-                  padding: const EdgeInsets.only(top: 24, bottom: 48),
-                  child: P(
-                      text:
-                          'Feel the experience of seeing art from around the world in the palm of your hand without having to come directly to the museum',
-                      fontSize: 14,
-                      color: Colors.white.withOpacity(0.50)),
-                ),
-                const MainButton(
-                  text: 'Empezar',
-                  route: 'home',
-                ),
-              ],
-            ),
+          _WelcomeBody(
+            titleText:
+                'Descubre lo mejor del diseño y la ilustración colombiana',
+            descriptionText:
+                'Feel the experience of seeing art from around the world in the palm of your hand without having to come directly to the museum',
           ),
         ],
       ),
     ));
+  }
+}
+
+class _WelcomeLogo extends StatelessWidget {
+  const _WelcomeLogo({
+    Key? key,
+    required this.text,
+  }) : super(key: key);
+  final String text;
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.only(left: 28, top: 14, bottom: 180),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: TextLogo(
+            text: text,
+            size: 32,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _WelcomeBody extends StatelessWidget {
+  const _WelcomeBody({
+    Key? key,
+    required this.titleText,
+    required this.descriptionText,
+  }) : super(key: key);
+  final String titleText;
+  final String descriptionText;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 28),
+      width: double.infinity,
+      child: Column(
+        children: [
+          H1(text: titleText, fontSize: 40),
+          Padding(
+            padding: const EdgeInsets.only(top: 24, bottom: 48),
+            child: P(
+                text: descriptionText,
+                fontSize: 14,
+                color: Colors.white.withOpacity(0.50)),
+          ),
+          const MainButton(
+            text: 'Empezar',
+            route: 'home',
+          ),
+        ],
+      ),
+    );
   }
 }
