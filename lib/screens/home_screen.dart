@@ -97,7 +97,7 @@ class Screen2 extends StatelessWidget {
                       "Eneba",
                       "3D Max",
                       "This is a Nintendo 3DMAX classic console replica.",
-                      ["assets/past-time.jpg", "assets/past-time1.jpg"],
+                      ["assets/past-time.jpg", "assets/past-time-1.jpg"],
                       35,
                       31,
                       235),

@@ -70,19 +70,26 @@ class _DetailSwiper extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<String>? firstProjectPictures =
+        designer.projects!.isNotEmpty ? designer.projects![0].pictures : null;
+
     return Container(
       width: double.infinity,
       height: 400,
       child: Swiper(
-        pagination: SwiperPagination(),
-        control: SwiperControl(),
-        itemCount: 2,
+        pagination: null,
+        control: null,
+        itemCount: firstProjectPictures?.length ?? 0,
         itemBuilder: (context, index) {
-          final project = designer.projects![index];
-          return Padding(
-            padding: EdgeInsets.only(top: 40, left: 28, right: 28),
-            child: ProjectImagesCanvas(image: project.pictures[index]),
-          );
+          if (firstProjectPictures != null &&
+              index < firstProjectPictures.length) {
+            final image = firstProjectPictures[index];
+            return Padding(
+              padding: EdgeInsets.only(top: 40, left: 28, right: 28),
+              child: ProjectImagesCanvas(image: image),
+            );
+          }
+          return Container();
         },
       ),
     );
