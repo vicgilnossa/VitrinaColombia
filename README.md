@@ -1,16 +1,2 @@
-# vitrina_colombia
+![screen-20230803-210536~2](https://github.com/vicgilnossa/vitrinacolombia/assets/91137238/2b6e0222-de4d-42fb-a96f-b4c9877b6a95)
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
